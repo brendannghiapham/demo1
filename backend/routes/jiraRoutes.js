@@ -1,6 +1,6 @@
 const express = require('express');
 const { collectKpi } = require('../controllers/jiraController');
-const Kpi = require('../models/Kpi');
+// const Kpi = require('../models/Kpi');
 const { getGroupedIssues } = require('../services/jiraGroupingService');
 const { getJiraUsers, getUsersByProjects } = require('../services/jiraUserService');
 const { getKpiMetrics } = require('../services/jiraKpiService');
@@ -9,8 +9,107 @@ const { getSprintVelocity, getSprints, getSprintStoryPoints } = require('../serv
 const { getBugsByCategory } = require('../services/getBugsByCategory');
 const {getUserCapacityData} = require('../services/jiraUserCapacityService');  // Import the service file
 
+const { getSprintMetrics } = require('../services/sprintMetricsService');
+const { getTimeMetrics } = require('../services/timeMetricsService');
+const { getDefectMetrics } = require('../services/defectMetricsService');
+const { getReleaseMetrics } = require('../services/releaseMetricsService');
+const { getProjectTrackingMetrics } = require('../services/projectTrackingService');
 
 const router = express.Router();
+
+/**
+ * @route GET /api/project-tracking/:projectKey
+ * @desc Fetch epic completion rate, on-time delivery, risk register, and stakeholder engagement.
+ */
+router.get('/project-tracking', async (req, res) => {
+    try {
+        const { projects } = req.query;
+        const projectList = projects ? projects.split(',') : [];
+
+        const metrics = await getProjectTrackingMetrics(projectList);
+        res.json(metrics);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error", message: error.message });
+    }
+});
+
+/**
+ * @route GET /api/release-metrics/:projectKey
+ * @desc Fetch release burn-down, confidence score, and Go/No-Go criteria.
+ */
+router.get('/release-metrics', async (req, res) => {
+    try {
+        // const { projectKey } = req.params;
+        // if (!projectKey) {
+        //     return res.status(400).json({ error: "Project Key is required" });
+        // }
+        const { projects } = req.query;
+        const projectList = projects ? projects.split(',') : [];
+        const metrics = await getReleaseMetrics(projectList);
+        res.json(metrics);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+router.get('/defect-metrics', async (req, res) => {
+    try {
+        // const { projectKey } = req.params;
+        // if (!projectKey) {
+        //     return res.status(400).json({ error: "Project Key is required" });
+        // }
+        const { projects } = req.query;
+        const projectList = projects ? projects.split(',') : [];
+        const metrics = await getDefectMetrics(projectList);
+        res.json(metrics);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
+/**
+ * @route GET /api/time-metrics
+ * @desc Fetch Lead Time and Cycle Time
+ */
+router.get('/time-metrics', async (req, res) => {
+    try {
+        // const { projectKey, sprintId } = req.query;
+
+        // if (!projectKey && !sprintId) {
+        //     return res.status(400).json({ error: "Missing projectKey or sprintId" });
+        // }
+
+        // const jql = sprintId
+        //     ? `sprint=${sprintId}`
+        //     : `project=${projectKey} AND status=Done`;
+        //
+
+        const { projects } = req.query;
+        const projectList = projects ? projects.split(',') : [];
+        const jql = `project IN (${projectList.map(p => `"${p}"`).join(',')}) AND status=Done`;
+
+        const metrics = await getTimeMetrics(jql);
+        res.json(metrics);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
+/**
+ * @route GET /api/sprint-metrics/:boardId
+ * @desc Fetch Sprint Velocity and Planned vs Delivered
+ */
+router.get('/sprint-metrics/:boardId', async (req, res) => {
+    try {
+        const { boardId } = req.params;
+        const metrics = await getSprintMetrics(boardId);
+        res.json(metrics);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 router.get('/sprints', async (req, res) => {
     const { projects } = req.query;
@@ -64,15 +163,16 @@ router.get('/projects', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch projects' });
     }
 });
-router.get('/kpi/:user', async (req, res) => {
-    try {
-        const kpiData = await Kpi.findOne({ user: req.params.user });
-        if (!kpiData) return res.status(404).json({ error: 'No data found' });
-        res.json(kpiData);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch KPI data' });
-    }
-});
+
+// router.get('/kpi/:user', async (req, res) => {
+//     try {
+//         const kpiData = await Kpi.findOne({ user: req.params.user });
+//         if (!kpiData) return res.status(404).json({ error: 'No data found' });
+//         res.json(kpiData);
+//     } catch (error) {
+//         res.status(500).json({ error: 'Failed to fetch KPI data' });
+//     }
+// });
 
 // Fetch KPI data with filters
 router.get('/kpi2', async (req, res) => {

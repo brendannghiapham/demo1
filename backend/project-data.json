@@ -1,0 +1,1040 @@
+{
+  "data": {
+    "jira": {
+      "allJiraProjects": {
+        "edges": [
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10200",
+              "name": "AI-Team",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10200~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "AITEAM",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10414?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "195",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/195"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "AI-Team",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:5c5ddc19-d082-4604-ad59-66ea85c5c032",
+                "name": "Julian Fuchs",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/712020:5c5ddc19-d082-4604-ad59-66ea85c5c032/f3c6d08e-4ef9-4cf6-91ab-a9ed60075857/128",
+                "id": "ari:cloud:identity::user/712020:5c5ddc19-d082-4604-ad59-66ea85c5c032"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10129",
+              "name": "Beautify",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10129~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "BEAUT",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "125",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/125"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Beautify",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "62492837a629c30068a6ac37",
+                "name": "Yota Numata",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/62492837a629c30068a6ac37/ecf5a54c-0a7d-4e17-94d7-14d33d686676/128",
+                "id": "ari:cloud:identity::user/62492837a629c30068a6ac37"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10131",
+              "name": "Beautify - FIRST MVP",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10131~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "BFM",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "124",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/124"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Beautify - FIRST MVP",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "62492837a629c30068a6ac37",
+                "name": "Yota Numata",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/62492837a629c30068a6ac37/ecf5a54c-0a7d-4e17-94d7-14d33d686676/128",
+                "id": "ari:cloud:identity::user/62492837a629c30068a6ac37"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10130",
+              "name": "Beautify - MVP",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10130~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "BM",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10412?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "123",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/123"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Beautify - MVP",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "62492837a629c30068a6ac37",
+                "name": "Yota Numata",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/62492837a629c30068a6ac37/ecf5a54c-0a7d-4e17-94d7-14d33d686676/128",
+                "id": "ari:cloud:identity::user/62492837a629c30068a6ac37"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10136",
+              "name": "Biz-s Project",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10136~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "BSP",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10403?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "135",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/135"
+              },
+              "projectType": "SOFTWARE",
+              "category": {
+                "name": "パートナープログラム",
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project-category/10000"
+              },
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Biz-s Project",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:e190a0f2-e510-4488-ac39-c0f46a012702",
+                "name": "Nami Mohamed Nilam",
+                "picture": "https://secure.gravatar.com/avatar/309c643e4342525ecaebede499c417e2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNN-3.png",
+                "id": "ari:cloud:identity::user/712020:e190a0f2-e510-4488-ac39-c0f46a012702"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10137",
+              "name": "Biz-s Project Board",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10137~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "BPB",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10400?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "136",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/136"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Biz-s Project Board",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:e190a0f2-e510-4488-ac39-c0f46a012702",
+                "name": "Nami Mohamed Nilam",
+                "picture": "https://secure.gravatar.com/avatar/309c643e4342525ecaebede499c417e2?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FNN-3.png",
+                "id": "ari:cloud:identity::user/712020:e190a0f2-e510-4488-ac39-c0f46a012702"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10249",
+              "name": "Borderless City Project",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10249~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "BCP",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10410?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "225",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/225"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Borderless City Project",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:dc07ca8c-0043-453d-8946-4ce5fa73f9d5",
+                "name": "Moe To",
+                "picture": "https://secure.gravatar.com/avatar/28b0bf9a3c1b03b15b1d491910fe73b9?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMT-6.png",
+                "id": "ari:cloud:identity::user/712020:dc07ca8c-0043-453d-8946-4ce5fa73f9d5"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10105",
+              "name": "Calbee-FfF",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10105~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "CF",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10425?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "99",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/99"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Calbee-FfF",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "642aa66b22330bdf97ab2b3c",
+                "name": "Souhei Eto",
+                "picture": "https://secure.gravatar.com/avatar/98f9974a3187903e81ffc07253b0bfc3?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FSE-1.png",
+                "id": "ari:cloud:identity::user/642aa66b22330bdf97ab2b3c"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10211",
+              "name": "Daicolo",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10211~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "DAICO",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10411?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "204",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/204"
+              },
+              "projectType": "SOFTWARE",
+              "category": {
+                "name": "社内クライアントプロジェクト",
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project-category/10001"
+              },
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": true
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Daicolo",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:b16c13ed-c09e-49d4-b0ee-df525b59c259",
+                "name": "Honda Mitsuhito",
+                "picture": "https://secure.gravatar.com/avatar/c67eec4c04343619dd5b77d93534161d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHM-3.png",
+                "id": "ari:cloud:identity::user/712020:b16c13ed-c09e-49d4-b0ee-df525b59c259"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10146",
+              "name": "Deflag",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10146~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "DFLG",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10414?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "144",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/144"
+              },
+              "projectType": "SOFTWARE",
+              "category": {
+                "name": "パートナープログラム",
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project-category/10000"
+              },
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Deflag",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:5c5ddc19-d082-4604-ad59-66ea85c5c032",
+                "name": "Julian Fuchs",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/712020:5c5ddc19-d082-4604-ad59-66ea85c5c032/f3c6d08e-4ef9-4cf6-91ab-a9ed60075857/128",
+                "id": "ari:cloud:identity::user/712020:5c5ddc19-d082-4604-ad59-66ea85c5c032"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10210",
+              "name": "Demo_Timecard",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10210~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "DT",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10400?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "203",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/203"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Demo_Timecard",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:18abca5b-5389-4d3d-b987-306f7d91c36e",
+                "name": "Yusuke Nakajima",
+                "picture": "https://secure.gravatar.com/avatar/ab7ba13062f305def984aed6aa1c7423?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FYN-1.png",
+                "id": "ari:cloud:identity::user/712020:18abca5b-5389-4d3d-b987-306f7d91c36e"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10077",
+              "name": "East and West continuous",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10077~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "EWC",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10410?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "68",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/68"
+              },
+              "projectType": "SOFTWARE",
+              "category": {
+                "name": "社内クライアントプロジェクト",
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project-category/10001"
+              },
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "East and West continuous",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "6311b4543e578bb3b5fee7f6",
+                "name": "Yuko Fujino",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6311b4543e578bb3b5fee7f6/c9d9c31b-4a36-4c67-88b6-83405f723b56/128",
+                "id": "ari:cloud:identity::user/6311b4543e578bb3b5fee7f6"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10132",
+              "name": "echo",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10132~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "ECHO",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10408?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "126",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/126"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "echo",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "642aa66b22330bdf97ab2b3c",
+                "name": "Souhei Eto",
+                "picture": "https://secure.gravatar.com/avatar/98f9974a3187903e81ffc07253b0bfc3?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FSE-1.png",
+                "id": "ari:cloud:identity::user/642aa66b22330bdf97ab2b3c"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10030",
+              "name": "EPW_Development",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10030~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "EP",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10553?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "29",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/29"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "EPW_Development",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "6320729c55a96b85c3119fb9",
+                "name": "Takuya Matsumoto",
+                "picture": "https://secure.gravatar.com/avatar/ab76e867ebf9732aa196b5c6cdb563ce?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTM-3.png",
+                "id": "ari:cloud:identity::user/6320729c55a96b85c3119fb9"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10049",
+              "name": "Example project",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10049~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "EX",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10422?size=medium"
+              },
+              "projectStyle": "TEAM_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "45",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/45"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Example project",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "62492837a629c30068a6ac37",
+                "name": "Yota Numata",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/62492837a629c30068a6ac37/ecf5a54c-0a7d-4e17-94d7-14d33d686676/128",
+                "id": "ari:cloud:identity::user/62492837a629c30068a6ac37"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10067",
+              "name": "Fortune Telling",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10067~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "FT",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "59",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/59"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Fortune Telling",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "62dfddb9a855c6955879df03",
+                "name": "Osaki Michihiko",
+                "picture": "https://secure.gravatar.com/avatar/730e23a876d6118a28d31abcbf9e35f8?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FOM-1.png",
+                "id": "ari:cloud:identity::user/62dfddb9a855c6955879df03"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10186",
+              "name": "Hanwha Japan",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10186~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "KRWJP",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10418?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "183",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/183"
+              },
+              "projectType": "SOFTWARE",
+              "category": {
+                "name": "パートナープログラム",
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project-category/10000"
+              },
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Hanwha Japan",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:b16c13ed-c09e-49d4-b0ee-df525b59c259",
+                "name": "Honda Mitsuhito",
+                "picture": "https://secure.gravatar.com/avatar/c67eec4c04343619dd5b77d93534161d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHM-3.png",
+                "id": "ari:cloud:identity::user/712020:b16c13ed-c09e-49d4-b0ee-df525b59c259"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10098",
+              "name": "Hiruta GoDump",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10098~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "HG",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "91",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/91"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": true
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Hiruta GoDump",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "6311b4543e578bb3b5fee7f6",
+                "name": "Yuko Fujino",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6311b4543e578bb3b5fee7f6/c9d9c31b-4a36-4c67-88b6-83405f723b56/128",
+                "id": "ari:cloud:identity::user/6311b4543e578bb3b5fee7f6"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10159",
+              "name": "HR Sourcing Automation",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10159~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "HSA",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "159",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/159"
+              },
+              "projectType": "SOFTWARE",
+              "category": {
+                "name": "社内クライアントプロジェクト",
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project-category/10001"
+              },
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "HR Sourcing Automation",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:5c5ddc19-d082-4604-ad59-66ea85c5c032",
+                "name": "Julian Fuchs",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/712020:5c5ddc19-d082-4604-ad59-66ea85c5c032/f3c6d08e-4ef9-4cf6-91ab-a9ed60075857/128",
+                "id": "ari:cloud:identity::user/712020:5c5ddc19-d082-4604-ad59-66ea85c5c032"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10188",
+              "name": "Image generator",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10188~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "IG",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10412?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "185",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/185"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Image generator",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:079e509b-bfa4-4525-b8ad-12fe7251689d",
+                "name": "Hiroki Umezawa",
+                "picture": "https://secure.gravatar.com/avatar/4913ce94d21b6c17724d7088b61eb9ad?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHU-3.png",
+                "id": "ari:cloud:identity::user/712020:079e509b-bfa4-4525-b8ad-12fe7251689d"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10248",
+              "name": "impact circle",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10248~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "IC",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10406?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "224",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/224"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "impact circle",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "642aa66b22330bdf97ab2b3c",
+                "name": "Souhei Eto",
+                "picture": "https://secure.gravatar.com/avatar/98f9974a3187903e81ffc07253b0bfc3?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FSE-1.png",
+                "id": "ari:cloud:identity::user/642aa66b22330bdf97ab2b3c"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10015",
+              "name": "Incident",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10015~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "JIT",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10551?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "14",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/14"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": "",
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Incident",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "6360aa10f7ad721e784f3810",
+                "name": "Romi D Sitorus",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/6360aa10f7ad721e784f3810/8a634dce-d144-4330-965f-e95d4517b09a/128",
+                "id": "ari:cloud:identity::user/6360aa10f7ad721e784f3810"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10283",
+              "name": "Internal PJ",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10283~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "IP",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10415?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "258",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/258"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Internal PJ",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "62492837a629c30068a6ac37",
+                "name": "Yota Numata",
+                "picture": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/62492837a629c30068a6ac37/ecf5a54c-0a7d-4e17-94d7-14d33d686676/128",
+                "id": "ari:cloud:identity::user/62492837a629c30068a6ac37"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10383",
+              "name": "Ishibashi Gakki",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10383~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "IS",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10416?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "359",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/359"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": true
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Ishibashi Gakki",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "712020:079e509b-bfa4-4525-b8ad-12fe7251689d",
+                "name": "Hiroki Umezawa",
+                "picture": "https://secure.gravatar.com/avatar/4913ce94d21b6c17724d7088b61eb9ad?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FHU-3.png",
+                "id": "ari:cloud:identity::user/712020:079e509b-bfa4-4525-b8ad-12fe7251689d"
+              },
+              "isFavourite": false
+            }
+          },
+          {
+            "node": {
+              "canViewIssue": {
+                "canPerform": true
+              },
+              "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:project/10201",
+              "name": "Jira-Jitera-Sync",
+              "favouriteValue": {
+                "isFavourite": false,
+                "id": "ari:cloud:jira:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:favourite/activation/ed1b7d88-487f-4a94-9849-c2397642bbd7/Project~10201~712020:7aa9e406-0048-4da7-b87b-5bb3a9eadc8e"
+              },
+              "key": "JJS",
+              "avatar": {
+                "medium": "https://jitera.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10406?size=medium"
+              },
+              "projectStyle": "COMPANY_MANAGED_PROJECT",
+              "navigationMetadata": {
+                "__typename": "JiraSoftwareProjectNavigationMetadata",
+                "boardId": "197",
+                "id": "ari:cloud:jira-software:bbf6ab52-3ca7-49db-aa3f-b05174adaeca:board/197"
+              },
+              "projectType": "SOFTWARE",
+              "category": null,
+              "projectUrl": null,
+              "canViewProjectConfig": {
+                "canPerform": false
+              },
+              "jiraProjectType": "SOFTWARE",
+              "jiraProjectName": "Jira-Jitera-Sync",
+              "lead": {
+                "__typename": "AtlassianAccountUser",
+                "__isUser": "AtlassianAccountUser",
+                "accountId": "627892a2236090006f5eec94",
+                "name": "Atul Kanswal",
+                "picture": "https://secure.gravatar.com/avatar/248fc8cd8dcdbe79e4f3aaa115ff5c54?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAK-3.png",
+                "id": "ari:cloud:identity::user/627892a2236090006f5eec94"
+              },
+              "isFavourite": false
+            }
+          }
+        ],
+        "totalCount": 96,
+        "pageInfo": {
+          "hasNextPage": true
+        },
+        "__isHasTotal": "JiraProjectConnection"
+      }
+    }
+  },
+  "extensions": {
+    "gateway": {
+      "request_id": "1cecec0d0233470e9e8fa99cd7e8fc82",
+      "crossRegion": false,
+      "edgeCrossRegion": false
+    }
+  }
+}

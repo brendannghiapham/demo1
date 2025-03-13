@@ -18,13 +18,13 @@ app.use(cors({
   credentials: true
 }));
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
-
+// mongoose.connect(process.env.MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// })
+// .then(() => console.log('MongoDB connected'))
+// .catch(err => console.log(err));
+//
 app.use('/api/jira', jiraRoutes);
 
 const usersToTrack = ['john.doe', 'alice.smith'];

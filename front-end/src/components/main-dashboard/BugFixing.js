@@ -24,7 +24,7 @@ const predefinedColors = [
   'rgba(201, 203, 207, 0.7)', // Grey
 ];
 
-const TimeTracking = ({ kpiData }) => {
+const BugFixing = ({ kpiData }) => {
   if (!kpiData || kpiData.length === 0) {
     return (
       <Typography variant="h6" align="center">
@@ -33,40 +33,36 @@ const TimeTracking = ({ kpiData }) => {
     );
   }
 
-  // Sort users to maintain color consistency
+  // Sort users alphabetically for color consistency
   const sortedUsers = [...kpiData].sort((a, b) => a.user.localeCompare(b.user));
 
+  // Extract user names
   const userNames = sortedUsers.map((user) => user.user);
 
-  const estimatedTime = sortedUsers.map((user) => {
+  // Calculate Bug Fixing Efficiency per user
+  const bugFixingEfficiency = sortedUsers.map((user) => {
     const monthlyData = user.monthlyData || {};
-    return Object.values(monthlyData).reduce(
-      (acc, monthData) => acc + (monthData.totalTimeEstimated || 0),
+    const totalBugs = Object.values(monthlyData).reduce(
+      (acc, monthData) => acc + (monthData.totalBugs || 0),
       0
     );
-  });
-
-  const actualTime = sortedUsers.map((user) => {
-    const monthlyData = user.monthlyData || {};
-    return Object.values(monthlyData).reduce(
-      (acc, monthData) => acc + (monthData.totalTimeSpent || 0),
+    const totalTasks = Object.values(monthlyData).reduce(
+      (acc, monthData) => acc + (monthData.totalTasks || 0),
       0
     );
+    return totalTasks === 0 ? 0 : (totalBugs / totalTasks) * 100;
   });
 
+  // Chart Data
   const chartData = {
     labels: userNames,
     datasets: [
       {
-        label: 'Total Estimated Time (Hours)',
-        data: estimatedTime,
-        backgroundColor: predefinedColors[0], // Consistent Blue
-        borderWidth: 1,
-      },
-      {
-        label: 'Actual Burned Time (Hours)',
-        data: actualTime,
-        backgroundColor: predefinedColors[1], // Consistent Red
+        label: 'Bug Fixing Efficiency (%)',
+        data: bugFixingEfficiency,
+        backgroundColor: userNames.map(
+          (_, index) => predefinedColors[index % predefinedColors.length]
+        ),
         borderWidth: 1,
       },
     ],
@@ -77,12 +73,13 @@ const TimeTracking = ({ kpiData }) => {
     maintainAspectRatio: false,
     plugins: {
       legend: { position: 'top' },
-      title: { display: true, text: 'Estimated vs Actual Burned Time Per User' },
+      title: { display: true, text: 'Bug Fixing Efficiency Per User' },
     },
     scales: {
       y: {
         beginAtZero: true,
-        title: { display: true, text: 'Time (Hours)' },
+        max: 100,
+        ticks: { callback: (value) => `${value}%` },
       },
     },
   };
@@ -90,7 +87,7 @@ const TimeTracking = ({ kpiData }) => {
   return (
     <Paper sx={{ p: 2, boxShadow: 3 }}>
       <Typography variant="h6" align="center">
-        Time Tracking Per User
+        Bug Fixing Efficiency
       </Typography>
       <Box sx={{ width: '100%', minHeight: '300px', height: 'auto' }}>
         <Bar data={chartData} options={chartOptions} />
@@ -99,4 +96,4 @@ const TimeTracking = ({ kpiData }) => {
   );
 };
 
-export default TimeTracking;
+export default BugFixing;

@@ -35,7 +35,7 @@ async function fetchJiraIssues(jql, startAt) {
 
     try {
         const response = await axios.get(url, AUTH_HEADER);
-        cache.set(cacheKey, response.data.issues, 300); // Cache for 5 min
+        cache.set(cacheKey, response.data.issues, process.env.SYS_CACHE_TIME); // Cache for 5 min
         return response.data.issues || [];
     } catch (error) {
         console.error('Error fetching JIRA data:', error.response?.data || error.message);
@@ -87,7 +87,19 @@ async function fetchAllJiraIssues(jql, cacheKey, startDate, endDate) {
     // Flatten results into a single array
     allIssues = results.flat();
 
-    cache.set(cacheKey, allIssues, 300); // Cache for 5 min
+    cache.set(cacheKey, allIssues, process.env.SYS_CACHE_TIME);
     return allIssues;
 }
-module.exports = { fetchAllJiraIssues };
+
+
+async function fetchProjectsFromJira(startAt = 0, maxResults) {
+    try {
+        const response = await axios.get(`${JIRA_API_BASE}/project/search?startAt=${startAt}&maxResults=${maxResults}&status=live`, AUTH_HEADER);
+        return response.data.values;
+    } catch (error) {
+        console.error('Error fetching Jira projects from API:', error.response?.data || error.message);
+        throw new Error('Failed to fetch Jira projects');
+    }
+}
+
+module.exports = { fetchAllJiraIssues,  fetchProjectsFromJira};

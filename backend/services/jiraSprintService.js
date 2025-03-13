@@ -72,7 +72,7 @@ async function getSprintVelocity(projects) {
         });
 
         const result = Object.values(sprintData).sort((a, b) => a.startDate.localeCompare(b.startDate));
-        cache.set(cacheKey, result, 300); // Cache final sprint velocity result for 5 min
+        cache.set(cacheKey, result, process.env.SYS_CACHE_TIME); // Cache final sprint velocity result for 5 min
         return result
     } catch (error) {
         console.error('Error fetching Sprint Velocity:', error.response?.data || error.message);
