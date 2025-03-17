@@ -31,15 +31,19 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
   const [sprintVelocity, setSprintVelocity] = useState([]);
   const [bugData, setBugData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [allIssues, setAllIssues] = useState([]);
 
   const fetchData = async () => {
     if (!selectedProjects.length > 0) {
       setKpiData([]);
       setSprintVelocity([]);
       setBugData({});
+      setAllIssues([]);
     }
     setLoading(true);
     const allIssues = await fetchAllIssues(selectedProjects, startDate, endDate);
+    setAllIssues(allIssues);
+
     Promise.all([
       fetchProjectKPI(allIssues),
       fetchSprintVelocity2(allIssues),
@@ -50,7 +54,6 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
         setKpiData(kpiResult);
         setSprintVelocity(sprintResult);
         setBugData(bugResult);
-        console.log('groupProjectMetrics', groupProjectMetrics);
       })
       .catch((error) => console.error('Error fetching data:', error))
       .finally(() => setLoading(false));
@@ -75,14 +78,18 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
       ) : kpiData.length > 0 ? (
         <Grid container spacing={3} sx={{ justifyContent: 'center' }}>
           <Typography variant="h5">Burndown Chart</Typography>
-          {/*<BurndownChart />*/}
-          {/*{<TaskStatusTable />}*/}
-          {<KPIChart />}
+          <BurndownChart issues={allIssues} />
+
+          {<KPIChart issues={allIssues} />}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
               <TaskCompletion kpiData={kpiData} />
             </Paper>
           </Grid>
+          <Grid item xs={12}>
+            <TaskStatusTable issues={allIssues} />
+          </Grid>
+
           <Grid item xs={12}>
             <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
               <BugFixing kpiData={kpiData} />

@@ -85,14 +85,14 @@ const BugFixing = ({ kpiData }) => {
   };
 
   return (
-    <Paper sx={{ p: 2, boxShadow: 3 }}>
+    <Box>
       <Typography variant="h6" align="center">
         Bug Fixing Efficiency
       </Typography>
       <Box sx={{ width: '100%', minHeight: '300px', height: 'auto' }}>
         <Bar data={chartData} options={chartOptions} />
       </Box>
-    </Paper>
+    </Box>
   );
 };
 

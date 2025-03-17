@@ -9,72 +9,113 @@ import {
   CategoryScale,
   BarElement,
 } from 'chart.js';
-import axios from 'axios';
-import config from '../config'; // API URL from .env
-import { fetchAllIssues } from '../utils/api.utils';
 import { format, startOfWeek, parseISO } from 'date-fns';
+import { Box, Typography } from '@mui/material';
 
 ChartJS.register(Title, Tooltip, Legend, LinearScale, CategoryScale, BarElement);
 
-const KPIChart = () => {
+const KPIChart = ({ issues }) => {
   const [chartData, setChartData] = useState(null);
+  const [sprintMapping, setSprintMapping] = useState({});
 
   useEffect(() => {
-    fetchAllIssues(['PMAX'])
-      .then((issues) => {
-        // const issues = response.data.issues || [];
-        // const issues = response.data || [];
-        const capacityPerWeek = 35; // Each user has 35h per week
+    if (!issues || issues.length === 0) {
+      setChartData(null);
+      return;
+    }
 
-        const projectKPI = {}; // { project: { week: SP } }
+    const projectKPI = {}; // { project: { week: SP } }
+    const sprintMap = {}; // { yyyy-ww: Sprint Name }
 
-        issues.forEach((issue) => {
-          if (issue.fields && issue.fields.project && issue.fields.customfield_10028) {
-            const project = issue.fields.project.name;
-            const storyPoints = issue.fields.customfield_10028 || 0;
+    issues.forEach((issue) => {
+      if (issue.fields && issue.fields.project && issue.fields.customfield_10028) {
+        const project = issue.fields.project.key;
+        const storyPoints = issue.fields.customfield_10028 || 0;
 
-            // Get Sprint Name
-            const sprintField = issue.fields.customfield_10020; // Sprint data from API
-            if (!sprintField || sprintField.length === 0) return; // Skip if no sprint assigned
-            const sprint = sprintField[0].name; // Use first sprint name
+        // Get Sprint Info
+        const sprintField = issue.fields.customfield_10020;
+        if (!sprintField || sprintField.length === 0) return;
+        const sprintName = sprintField[0].name;
+        const sprintStartDate = parseISO(sprintField[0].startDate);
+        const sprintWeek = format(startOfWeek(sprintStartDate, { weekStartsOn: 1 }), 'yyyy-ww');
 
-            if (!projectKPI[project]) {
-              projectKPI[project] = {};
-            }
-            if (!projectKPI[project][sprint]) {
-              projectKPI[project][sprint] = 0;
-            }
+        // Map yyyy-ww to Sprint Name
+        sprintMap[sprintWeek] = sprintName;
 
-            projectKPI[project][sprint] += storyPoints;
-          }
-        });
+        if (!projectKPI[project]) {
+          projectKPI[project] = {};
+        }
+        if (!projectKPI[project][sprintWeek]) {
+          projectKPI[project][sprintWeek] = 0;
+        }
 
-        // Convert data to Chart.js format
-        const sprints = [
-          ...new Set(Object.values(projectKPI).flatMap((sprintData) => Object.keys(sprintData))),
-        ];
-        const datasets = Object.entries(projectKPI).map(([project, sprintSP]) => ({
-          label: project,
-          data: sprints.map((sprint) => sprintSP[sprint] || 0), // Normalize KPI
-          backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 150, 0.6)`,
-        }));
+        projectKPI[project][sprintWeek] += storyPoints;
+      }
+    });
 
-        setChartData({
-          labels: sprints,
-          datasets: datasets,
-        });
-        console.log('Project KPI data: ', projectKPI);
-      })
-      .catch((error) => {
-        console.error('Error fetching KPI data:', error);
-      });
-  }, []);
+    setSprintMapping(sprintMap);
+
+    // Prepare X-axis labels (yyyy-ww format)
+    const weeks = [
+      ...new Set(Object.values(projectKPI).flatMap((weekData) => Object.keys(weekData))),
+    ].sort();
+
+    // Prepare dataset for Chart.js
+    const datasets = Object.entries(projectKPI).map(([project, weeklySP]) => ({
+      label: project,
+      data: weeks.map((week) => weeklySP[week] || 0), // Use yyyy-ww format for X-axis
+      backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 150, 0.6)`,
+    }));
+
+    setChartData({
+      labels: weeks,
+      datasets: datasets,
+    });
+  }, [issues]);
 
   return (
-    <div>
-      <h3>Project KPI Velocity (SP Delivered / 35h) Per Week</h3>
-      {chartData ? <Bar data={chartData} /> : <p>Loading...</p>}
-    </div>
+    <Box>
+      <Typography variant="h6">Project KPI Velocity (SP Delivered / 35h) Per Week</Typography>
+      {chartData ? (
+        <Bar
+          data={chartData}
+          options={{
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  title: (tooltipItems) => {
+                    const weekKey = tooltipItems[0].label;
+                    return sprintMapping[weekKey] || weekKey; // Show Sprint Name on hover
+                  },
+                },
+              },
+              legend: {
+                position: 'top',
+              },
+            },
+            responsive: true,
+            scales: {
+              x: {
+                stacked: true,
+                title: {
+                  display: true,
+                  text: 'Sprint Weeks (yyyy-ww)',
+                },
+              },
+              y: {
+                stacked: true,
+                title: {
+                  display: true,
+                  text: 'Story Points Delivered',
+                },
+              },
+            },
+          }}
+        />
+      ) : (
+        <Typography>No Data Available</Typography>
+      )}
+    </Box>
   );
 };
 

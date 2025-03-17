@@ -1,11 +1,10 @@
 import React from 'react';
-import Select from 'react-select';
-import { Button, Box } from '@mui/material';
+import { Box, Button, MenuItem, Select, Typography, TextField } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 
 const ProjectSelector = ({
-  projects = [],
+  projects,
   selectedProjects,
   setSelectedProjects,
   startDate,
@@ -14,50 +13,78 @@ const ProjectSelector = ({
   setEndDate,
   onSearch,
 }) => {
-  const handleProjectChange = (selectedOptions) => {
-    setSelectedProjects(selectedOptions ? selectedOptions.map((opt) => opt.value) : []);
+  const handleProjectChange = (event) => {
+    setSelectedProjects(event.target.value);
   };
 
-  return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Box display="flex" alignItems="center" gap={2} sx={{ mb: 2 }}>
-        {/* Project Dropdown */}
-        <Select
-          options={projects.map((project) => ({ value: project.key, label: project.name }))}
-          onChange={handleProjectChange}
-          value={projects
-            .filter((proj) => selectedProjects.includes(proj.key))
-            .map((proj) => ({ value: proj.key, label: proj.name }))}
-          isMulti
-          isClearable
-          placeholder="Select Projects..."
-          styles={{ container: (base) => ({ ...base, minWidth: '250px' }) }}
-        />
+  // Sort projects: Move selected projects to the top
+  const sortedProjects = [...projects].sort((a, b) => {
+    const isSelectedA = selectedProjects.includes(a.key);
+    const isSelectedB = selectedProjects.includes(b.key);
+    return isSelectedB - isSelectedA; // Move selected projects to the top
+  });
 
-        {/* Start Date Picker */}
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        overflow: 'auto',
+        p: 2,
+        width: '100%',
+        maxHeight: '80vh',
+      }}
+    >
+      <Typography variant="h6">Filter Criteria</Typography>
+
+      {/* Project Dropdown */}
+      <Select
+        multiple
+        value={selectedProjects}
+        onChange={handleProjectChange}
+        fullWidth
+        size="small"
+        sx={{ backgroundColor: 'white' }}
+      >
+        {sortedProjects.map((project) => (
+          <MenuItem
+            key={project.key}
+            value={project.key}
+            sx={{
+              fontWeight: selectedProjects.includes(project.key) ? 'bold' : 'normal', // Highlight selected projects
+            }}
+          >
+            {project.name}
+          </MenuItem>
+        ))}
+      </Select>
+
+      {/* Start Date Picker */}
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           label="Start Date"
           value={startDate}
-          onChange={(newDate) => setStartDate(newDate)}
-          format="yyyy-MM-dd"
-          renderInput={(params) => <input {...params} />}
+          onChange={setStartDate}
+          renderInput={(params) => <TextField {...params} fullWidth size="small" />}
         />
+      </LocalizationProvider>
 
-        {/* End Date Picker */}
+      {/* End Date Picker */}
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           label="End Date"
           value={endDate}
-          onChange={(newDate) => setEndDate(newDate)}
-          format="yyyy-MM-dd"
-          renderInput={(params) => <input {...params} />}
+          onChange={setEndDate}
+          renderInput={(params) => <TextField {...params} fullWidth size="small" />}
         />
+      </LocalizationProvider>
 
-        {/* Search Button */}
-        <Button variant="contained" color="primary" onClick={onSearch}>
-          Search
-        </Button>
-      </Box>
-    </LocalizationProvider>
+      {/* Search Button */}
+      <Button variant="contained" color="primary" fullWidth onClick={onSearch}>
+        Search
+      </Button>
+    </Box>
   );
 };
 

@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Paper, Typography, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -70,14 +70,12 @@ const TaskCompletion = ({ kpiData }) => {
   };
 
   return (
-    <Paper sx={{ p: 2, boxShadow: 3 }}>
-      <Typography variant="h6" align="center">
-        Total workload of company by user
-      </Typography>
+    <Box>
+      <Typography variant="h6">Total workload of company by user</Typography>
       <Box sx={{ width: '100%', minHeight: '300px', height: 'auto' }}>
         <Bar data={chartData} options={chartOptions} />
       </Box>
-    </Paper>
+    </Box>
   );
 };
 

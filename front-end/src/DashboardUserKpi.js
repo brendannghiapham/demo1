@@ -83,7 +83,7 @@ const DashboardUserKpi = () => {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer disableGutters component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
