@@ -25,6 +25,8 @@ const predefinedColors = [
 ];
 
 const TaskCompletion = ({ kpiData }) => {
+  console.log('[TaskCompletion], kpiData', kpiData);
+
   if (!kpiData || kpiData.length === 0) {
     return (
       <Typography variant="h6" align="center">
@@ -32,11 +34,10 @@ const TaskCompletion = ({ kpiData }) => {
       </Typography>
     );
   }
-
   // Extract all unique months
   const allMonths = new Set();
   kpiData.forEach((user) => {
-    Object.keys(user.monthlyData || {}).forEach((month) => allMonths.add(month));
+    Object.keys(user.weeklyData || {}).forEach((month) => allMonths.add(month));
   });
 
   const sortedMonths = [...allMonths].sort();
@@ -46,7 +47,7 @@ const TaskCompletion = ({ kpiData }) => {
 
   const datasets = sortedUsers.map((user, index) => ({
     label: user.user,
-    data: sortedMonths.map((month) => user.monthlyData?.[month]?.totalTasks || 0),
+    data: sortedMonths.map((month) => user.weeklyData?.[month]?.totalTasks || 0),
     backgroundColor: predefinedColors[index % predefinedColors.length], // Cycle through predefined colors
     borderWidth: 1,
   }));

@@ -1,10 +1,70 @@
+import { format, startOfWeek } from 'date-fns';
+
 const MAX_RESULTS = 100;
 const STORY_POINTS_FIELD = 'customfield_10028'; // Story Points (custom field)
 const SPRINT_FIELD = 'customfield_10020';
 const BUG_TYPE_FIELD = 'customfield_10271'; // Bug Type
 const ROOT_CAUSE_FIELD = 'customfield_10272'; // Bug Root Cause
 
-export const fetchProjectKPI = async (allIssues) => {
+export const fetchProjectKPIGroupByWeek = async (allIssues) => {
+  try {
+    const userMetrics = {};
+
+    allIssues.forEach((issue) => {
+      const user = issue.fields.assignee ? issue.fields.assignee.displayName : 'Unassigned';
+      const issueType = issue.fields.issuetype.name;
+      const timeSpent = issue.fields.timespent || 0;
+      const timeEstimated = issue.fields.timeoriginalestimate || 0;
+      const storyPoints = issue.fields[STORY_POINTS_FIELD] || 0;
+      const projectKey = issue.fields.project.key;
+
+      // Extract the week from the created date (YYYY-ww)
+      const createdDate = issue.fields.created.split('T')[0]; // Get the date without the time part
+      const date = new Date(createdDate); // Ensure the date is properly parsed
+      const week = format(startOfWeek(date, { weekStartsOn: 1 }), 'yyyy-ww'); // Format to YYYY-ww
+
+      // Initialize user metrics if not already initialized
+      if (!userMetrics[user]) {
+        userMetrics[user] = { user, weeklyData: {} };
+      }
+
+      if (!userMetrics[user].weeklyData[week]) {
+        userMetrics[user].weeklyData[week] = {
+          totalTasks: 0,
+          totalBugs: 0,
+          totalTimeSpent: 0,
+          totalTimeEstimated: 0,
+          totalEstimatedStoryPoint: 0,
+          taskTypes: {}, // Track issue types (Bug, User Story, etc.)
+        };
+      }
+
+      // Track weekly contributions (total tasks, total bugs, time spent, etc.)
+      userMetrics[user].weeklyData[week].totalTasks++;
+      userMetrics[user].weeklyData[week].totalTimeSpent += timeSpent / 3600; // Convert seconds to hours
+      userMetrics[user].weeklyData[week].totalTimeEstimated += timeEstimated / 3600; // Convert seconds to hours
+      userMetrics[user].weeklyData[week].totalEstimatedStoryPoint += storyPoints;
+
+      if (issueType === 'Bug') userMetrics[user].weeklyData[week].totalBugs++;
+
+      // Track the count of each issue type
+      if (!userMetrics[user].weeklyData[week].taskTypes[issueType]) {
+        userMetrics[user].weeklyData[week].taskTypes[issueType] = 0;
+      }
+      userMetrics[user].weeklyData[week].taskTypes[issueType]++;
+    });
+
+    return Object.values(userMetrics).map((user) => ({
+      user: user.user,
+      weeklyData: user.weeklyData,
+    }));
+  } catch (error) {
+    console.error('Error fetching KPI data:', error);
+    return [];
+  }
+};
+
+export const fetchProjectKPIGroupByMonth = async (allIssues) => {
   try {
     const userMetrics = {};
     allIssues.forEach((issue) => {
@@ -106,12 +166,16 @@ export const fetchSprintVelocity2 = async (allIssues) => {
 /**
  * Fetch Bug Analytics data
  */
-export const fetchBugData = async (allIssues) => {
+export const groupBugsByProject = async (allIssues) => {
   try {
     const bugData = {};
     allIssues.forEach((issue) => {
       const createdDate = issue.fields.created.split('T')[0]; // Extract YYYY-MM-DD
-      const month = createdDate.slice(0, 7); // Extract YYYY-MM for monthly grouping
+      // const month = createdDate.slice(0, 7); // Extract YYYY-MM for monthly grouping
+
+      const date = new Date(createdDate); // Ensure the date is properly parsed
+      const week = format(startOfWeek(date, { weekStartsOn: 1 }), 'yyyy-ww'); // Format to YYYY-ww
+
       const projectKey = issue.fields.project ? issue.fields.project.key : 'Unknown';
 
       // Extract values from array of objects
@@ -126,27 +190,27 @@ export const fetchBugData = async (allIssues) => {
         bugData[projectKey] = {};
       }
 
-      if (!bugData[projectKey][month]) {
-        bugData[projectKey][month] = { totalBugs: 0, bugTypes: {}, rootCauses: {} };
+      if (!bugData[projectKey][week]) {
+        bugData[projectKey][week] = { totalBugs: 0, bugTypes: {}, rootCauses: {} };
       }
 
       // Count total bugs
-      bugData[projectKey][month].totalBugs += 1;
+      bugData[projectKey][week].totalBugs += 1;
 
       // Count by bug type
       extractedBugTypes.forEach((bugType) => {
-        if (!bugData[projectKey][month].bugTypes[bugType]) {
-          bugData[projectKey][month].bugTypes[bugType] = 0;
+        if (!bugData[projectKey][week].bugTypes[bugType]) {
+          bugData[projectKey][week].bugTypes[bugType] = 0;
         }
-        bugData[projectKey][month].bugTypes[bugType] += 1;
+        bugData[projectKey][week].bugTypes[bugType] += 1;
       });
 
       // Count by root cause
       extractedRootCauses.forEach((rootCause) => {
-        if (!bugData[projectKey][month].rootCauses[rootCause]) {
-          bugData[projectKey][month].rootCauses[rootCause] = 0;
+        if (!bugData[projectKey][week].rootCauses[rootCause]) {
+          bugData[projectKey][week].rootCauses[rootCause] = 0;
         }
-        bugData[projectKey][month].rootCauses[rootCause] += 1;
+        bugData[projectKey][week].rootCauses[rootCause] += 1;
       });
     });
 

@@ -30,6 +30,8 @@ const BugGroupByDateAndProject = ({ bugData }) => {
     return <Typography variant="h6">No Bug Data Available</Typography>;
   }
 
+  console.log('BugGroupByDateAndProject data', bugData);
+  // console.log('BugGroupByDateAndProject data', JSON.stringify(bugData));
   // Extract all unique months
   const allMonths = new Set();
   Object.keys(bugData).forEach((project) => {
@@ -51,6 +53,32 @@ const BugGroupByDateAndProject = ({ bugData }) => {
     return monthData;
   });
 
+  // const rootCauseWeekData = sortedMonths.map((month) => {
+  //   const rootCauseWeekData = { month };
+  //   allProjects.forEach((project) => {
+  //     if (bugData[project]?.[month]?.rootCauses) {
+  //       Object.keys(bugData[project]?.[month]?.rootCauses).forEach((cause) => {
+  //         if (!rootCauseWeekData[cause]) {
+  //           rootCauseWeekData[cause] = 0;
+  //         } else {
+  //           rootCauseWeekData[cause] += cause;
+  //         }
+  //       });
+  //     }
+  //     // rootCauseWeekData[project] = bugData[project]?.[month]?.rootCauses || 0;
+  //   });
+  //   return rootCauseWeekData;
+  // });
+  const rootCauseKeys = Object.keys(bugData[Object.keys(bugData)[0]].rootCauses || {});
+
+  const chartDataLine = Object.keys(bugData).map((month) => ({
+    month,
+    totalBugs: bugData[month].totalBugs,
+    ...bugData[month].bugTypes,
+    ...bugData[month].rootCauses,
+  }));
+  console.log('[bugGroup] rootCauseWeekData', chartDataLine);
+
   // Generate colors dynamically for projects
   const COLORS = [
     '#0088FE',
@@ -70,7 +98,7 @@ const BugGroupByDateAndProject = ({ bugData }) => {
       </Typography>
 
       <Grid container justifyContent="center" sx={{ mt: 3 }}>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />

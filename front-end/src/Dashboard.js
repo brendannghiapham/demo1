@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
-  fetchBugData,
-  fetchProjectKPI,
+  groupBugsByProject,
+  fetchProjectKPIGroupByMonth,
   fetchSprintVelocity2,
+  fetchProjectKPIGroupByWeek,
   groupProjectMetrics,
 } from './services/services';
 import {
@@ -23,21 +24,25 @@ import BugGroupByDateAndProject from './components/main-dashboard/BugGroupByDate
 import { fetchAllIssues } from './utils/api.utils';
 import BurndownChart from './components/BurndownChart';
 import TaskStatusTable from './components/TaskStatusTable';
-import KPIChart from './components/KPIChart';
+import ProjectStoryPointBurned from './components/ProjectStoryPointBurned';
+import ProjectKPI from './components/ProjectKPI';
+import BugGroupByDateAndProjectLine from './components/main-dashboard/BugGroup';
 
 function Dashboard({ selectedProjects, startDate, endDate }) {
   // ✅ Use props from App.js
-  const [kpiData, setKpiData] = useState([]);
+  const [kpiDataByMonth, setKpiDataByMonth] = useState([]);
+  const [kpiDataByWeek, setKpiDataByWeek] = useState([]);
   const [sprintVelocity, setSprintVelocity] = useState([]);
-  const [bugData, setBugData] = useState({});
+  const [bugDataGroupByProject, setBugDataGroupByProject] = useState({});
   const [loading, setLoading] = useState(false);
   const [allIssues, setAllIssues] = useState([]);
 
   const fetchData = async () => {
     if (!selectedProjects.length > 0) {
-      setKpiData([]);
+      setKpiDataByMonth([]);
+      setKpiDataByWeek([]);
       setSprintVelocity([]);
-      setBugData({});
+      setBugDataGroupByProject({});
       setAllIssues([]);
     }
     setLoading(true);
@@ -45,15 +50,17 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
     setAllIssues(allIssues);
 
     Promise.all([
-      fetchProjectKPI(allIssues),
+      fetchProjectKPIGroupByMonth(allIssues),
       fetchSprintVelocity2(allIssues),
-      fetchBugData(allIssues),
-      groupProjectMetrics(allIssues),
+      groupBugsByProject(allIssues),
+      fetchProjectKPIGroupByWeek(allIssues),
+      // groupProjectMetrics(allIssues),
     ])
-      .then(([kpiResult, sprintResult, bugResult, groupProjectMetrics]) => {
-        setKpiData(kpiResult);
+      .then(([kpiResultByMonth, sprintResult, bugResult, kpiResultByWeek]) => {
+        setKpiDataByMonth(kpiResultByMonth);
         setSprintVelocity(sprintResult);
-        setBugData(bugResult);
+        setBugDataGroupByProject(bugResult);
+        setKpiDataByWeek(kpiResultByWeek);
       })
       .catch((error) => console.error('Error fetching data:', error))
       .finally(() => setLoading(false));
@@ -75,15 +82,16 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
         <Box display="flex" justifyContent="center" alignItems="center" height="300px">
           <CircularProgress size={60} />
         </Box>
-      ) : kpiData.length > 0 ? (
+      ) : kpiDataByMonth.length > 0 ? (
         <Grid container spacing={3} sx={{ justifyContent: 'center' }}>
           <Typography variant="h5">Burndown Chart</Typography>
           <BurndownChart issues={allIssues} />
 
-          {<KPIChart issues={allIssues} />}
+          {<ProjectStoryPointBurned issues={allIssues} />}
+          {<ProjectKPI issues={allIssues} />}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
-              <TaskCompletion kpiData={kpiData} />
+              <TaskCompletion kpiData={kpiDataByWeek} />
             </Paper>
           </Grid>
           <Grid item xs={12}>
@@ -92,12 +100,12 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
 
           <Grid item xs={12}>
             <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
-              <BugFixing kpiData={kpiData} />
+              <BugFixing kpiData={kpiDataByMonth} />
             </Paper>
           </Grid>
           <Grid item xs={12}>
             <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
-              <TimeTracking kpiData={kpiData} />
+              <TimeTracking kpiData={kpiDataByMonth} />
             </Paper>
           </Grid>
           <Grid item xs={12}>
@@ -107,14 +115,19 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
           </Grid>
           <Grid item xs={12}>
             <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
-              <BugGroupByDateAndProject bugData={bugData} />
+              <BugGroupByDateAndProject bugData={bugDataGroupByProject} />
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
+              <BugGroupByDateAndProjectLine bugData={bugDataGroupByProject} />
             </Paper>
           </Grid>
 
-          {Object.keys(bugData).map((project) => (
+          {Object.keys(bugDataGroupByProject).map((project) => (
             <Grid key={project} item xs={12}>
               <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
-                <BugAnalyticsChart bugData={bugData[project]} project={project} />
+                <BugAnalyticsChart bugData={bugDataGroupByProject[project]} project={project} />
               </Paper>
             </Grid>
           ))}

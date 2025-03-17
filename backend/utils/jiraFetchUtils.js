@@ -110,7 +110,7 @@ async function fetchAllJiraIssues(jql, cacheKey, startDate, endDate) {
         }
         if (issue.fields.assignee) {
             issue.fields.assignee.self = undefined;
-            issue.fields.assignee.avatarUrls = undefined;
+            // issue.fields.assignee.avatarUrls = undefined;
         }
         if (issue.fields.status.self) {
             issue.fields.status.self = undefined;

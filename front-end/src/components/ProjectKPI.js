@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   Title,
@@ -7,16 +7,16 @@ import {
   Legend,
   LinearScale,
   CategoryScale,
-  PointElement,
-  LineElement,
+  BarElement,
 } from 'chart.js';
-import { Box, Typography } from '@mui/material';
 import { format, startOfWeek, parseISO } from 'date-fns';
+import { Box, Typography } from '@mui/material';
 
-ChartJS.register(Title, Tooltip, Legend, LinearScale, CategoryScale, PointElement, LineElement);
+ChartJS.register(Title, Tooltip, Legend, LinearScale, CategoryScale, BarElement);
 
-const BurndownChart = ({ issues }) => {
+const ProjectKPI = ({ issues }) => {
   const [chartData, setChartData] = useState(null);
+  const [sprintMapping, setSprintMapping] = useState({});
 
   useEffect(() => {
     if (!issues || issues.length === 0) {
@@ -24,9 +24,13 @@ const BurndownChart = ({ issues }) => {
       return;
     }
 
-    const projectBurndown = {}; // { project: { week: SP } }
+    const projectKPI = {}; // { project: { week: SP } }
+    const sprintMap = {}; // { yyyy-ww: Sprint Name }
+    const users = new Set();
 
     issues.forEach((issue) => {
+      const user = issue.fields.assignee ? issue.fields.assignee.displayName : 'Unassigned';
+      users.add(user);
       if (issue.fields && issue.fields.project && issue.fields.customfield_10028) {
         const project = issue.fields.project.key;
         const storyPoints = issue.fields.customfield_10028 || 0;
@@ -34,32 +38,39 @@ const BurndownChart = ({ issues }) => {
         // Get Sprint Info
         const sprintField = issue.fields.customfield_10020;
         if (!sprintField || sprintField.length === 0) return;
+        const sprintName = sprintField[0].name;
         const sprintStartDate = parseISO(sprintField[0].startDate);
         const sprintWeek = format(startOfWeek(sprintStartDate, { weekStartsOn: 1 }), 'yyyy-ww');
 
-        if (!projectBurndown[project]) {
-          projectBurndown[project] = {};
+        // Map yyyy-ww to Sprint Name
+        sprintMap[sprintWeek] = sprintName;
+
+        if (!projectKPI[project]) {
+          projectKPI[project] = {};
         }
-        if (!projectBurndown[project][sprintWeek]) {
-          projectBurndown[project][sprintWeek] = 0;
+        if (!projectKPI[project][sprintWeek]) {
+          projectKPI[project][sprintWeek] = 0;
         }
 
-        projectBurndown[project][sprintWeek] += storyPoints;
+        projectKPI[project][sprintWeek] += storyPoints;
       }
     });
+    // console.log('ProjectKPI data', projectKPI);
+    // console.log('Users', users);
+    console.log('Users size', users.size);
+
+    setSprintMapping(sprintMap);
 
     // Prepare X-axis labels (yyyy-ww format)
     const weeks = [
-      ...new Set(Object.values(projectBurndown).flatMap((weekData) => Object.keys(weekData))),
+      ...new Set(Object.values(projectKPI).flatMap((weekData) => Object.keys(weekData))),
     ].sort();
 
-    // Prepare dataset for Chart.js Stacked Line Chart
-    const datasets = Object.entries(projectBurndown).map(([project, weeklySP]) => ({
+    // Prepare dataset for Chart.js
+    const datasets = Object.entries(projectKPI).map(([project, weeklySP]) => ({
       label: project,
-      data: weeks.map((week) => weeklySP[week] || 0),
-      borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 150, 1)`,
-      backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 150, 0.3)`,
-      fill: true,
+      data: weeks.map((week) => weeklySP[week] || 0), // Use yyyy-ww format for X-axis
+      backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 150, 0.6)`,
     }));
 
     setChartData({
@@ -70,15 +81,18 @@ const BurndownChart = ({ issues }) => {
 
   return (
     <Box>
-      <Typography variant="h6">Project Burndown (SP Remaining Per Week)</Typography>
+      <Typography variant="h6">Project KPI Velocity (SP Delivered / 35h) Per Week</Typography>
       {chartData ? (
-        <Line
+        <Bar
           data={chartData}
           options={{
             plugins: {
               tooltip: {
                 callbacks: {
-                  title: (tooltipItems) => tooltipItems[0].label, // Show week label
+                  title: (tooltipItems) => {
+                    const weekKey = tooltipItems[0].label;
+                    return sprintMapping[weekKey] || weekKey; // Show Sprint Name on hover
+                  },
                 },
               },
               legend: {
@@ -88,18 +102,18 @@ const BurndownChart = ({ issues }) => {
             responsive: true,
             scales: {
               x: {
+                stacked: true,
                 title: {
                   display: true,
                   text: 'Sprint Weeks (yyyy-ww)',
                 },
               },
               y: {
+                stacked: true,
                 title: {
                   display: true,
-                  text: 'Story Points Remaining',
+                  text: 'Story Points Delivered',
                 },
-                stacked: true, // ✅ Makes it a stacked Line Chart
-                beginAtZero: true,
               },
             },
           }}
@@ -111,4 +125,4 @@ const BurndownChart = ({ issues }) => {
   );
 };
 
-export default BurndownChart;
+export default ProjectKPI;

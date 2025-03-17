@@ -24,13 +24,14 @@ const BugAnalyticsChart = ({ bugData, project }) => {
   if (!bugData || Object.keys(bugData).length === 0) {
     return <Typography variant="h6">No Bug Data Available</Typography>;
   }
+  console.log('BugAnalyticsChart data', bugData);
   // Extract all unique months
   const allMonths = new Set();
   Object.keys(bugData).forEach((project) => {
     Object.keys(bugData[project] || {}).forEach((month) => allMonths.add(month));
   });
 
-  const sortedMonths = [...allMonths].sort();
+  // const sortedMonths = [...allMonths].sort();
 
   // Convert bug data into chart format
   const chartData = Object.keys(bugData).map((month) => ({
@@ -40,15 +41,15 @@ const BugAnalyticsChart = ({ bugData, project }) => {
     ...bugData[month].rootCauses,
   }));
 
-  const allProjects = Object.keys(bugData);
+  // const allProjects = Object.keys(bugData);
   // Convert bug data into chart-friendly format
-  const stackChartData = sortedMonths.map((month) => {
-    const monthData = { month };
-    allProjects.forEach((project) => {
-      monthData[project] = bugData[project]?.[month]?.totalBugs || 0;
-    });
-    return monthData;
-  });
+  // const stackChartData = sortedMonths.map((month) => {
+  //   const monthData = { month };
+  //   allProjects.forEach((project) => {
+  //     monthData[project] = bugData[project]?.[month]?.totalBugs || 0;
+  //   });
+  //   return monthData;
+  // });
 
   // Generate colors dynamically for projects
   const COLORS = [
@@ -72,7 +73,7 @@ const BugAnalyticsChart = ({ bugData, project }) => {
       {/* First row: Bar Chart for Total Bugs and Bug Types, and Line Chart for Root Causes */}
       <Grid container spacing={3}>
         {/* Bar Chart for Total Bugs and Bug Types */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={3}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -89,7 +90,7 @@ const BugAnalyticsChart = ({ bugData, project }) => {
         </Grid>
 
         {/* Line Chart for Root Causes Over Time */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={3}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />

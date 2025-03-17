@@ -14,7 +14,7 @@ import { Box, Typography } from '@mui/material';
 
 ChartJS.register(Title, Tooltip, Legend, LinearScale, CategoryScale, BarElement);
 
-const KPIChart = ({ issues }) => {
+const ProjectStoryPointBurned = ({ issues }) => {
   const [chartData, setChartData] = useState(null);
   const [sprintMapping, setSprintMapping] = useState({});
 
@@ -119,4 +119,4 @@ const KPIChart = ({ issues }) => {
   );
 };
 
-export default KPIChart;
+export default ProjectStoryPointBurned;
