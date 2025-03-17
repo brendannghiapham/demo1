@@ -1,6 +1,6 @@
 const express = require('express');
 const { collectKpi } = require('../controllers/jiraController');
-// const Kpi = require('../models/Kpi');
+const { format } = require('date-fns');
 const { getGroupedIssues } = require('../services/jiraGroupingService');
 const { getJiraUsers, getUsersByProjects } = require('../services/jiraUserService');
 const { getKpiMetrics } = require('../services/jiraKpiService');
@@ -14,9 +14,85 @@ const { getTimeMetrics } = require('../services/timeMetricsService');
 const { getDefectMetrics } = require('../services/defectMetricsService');
 const { getReleaseMetrics } = require('../services/releaseMetricsService');
 const { getProjectTrackingMetrics } = require('../services/projectTrackingService');
+// const { processProjectKpis } = require('../services/user-kpi/timeOffKpiService');
+const { getStoryPointMetrics, getAllIssues} = require('../services/main-dashboard/mainSPMetricsService');
 
 const router = express.Router();
+router.get('/issues', async (req, res) => {
+    try {
+        let { projects, startDate, endDate, statuses } = req.query;
+        if (!projects) {
+            return res.status(400).json({ error: 'Projects are required' });
+        }
+        const projectsArray = Array.isArray(projects) ? projects : projects.split(',');
+        const statusesArray = statuses ? statuses.split(',') : [];
 
+        // Set default values if null
+        if (!startDate) {
+            startDate = "2025-01-01"; // Default: 01-Jan-2025
+        }
+        if (!endDate) {
+            endDate = format(new Date(), "yyyy-MM-dd"); // Default: Today
+        }
+        const metrics = await getAllIssues(projectsArray, startDate, endDate, statusesArray);
+        res.json(metrics);
+    } catch (error) {
+        console.error("Error fetching story point metrics:", error.message);
+        res.status(500).json({ error: 'Failed to retrieve story point metrics' });
+    }
+});
+
+// API endpoint to get Story Point Metrics grouped by project and status
+router.get('/story-points', async (req, res) => {
+    try {
+        let { projects, startDate, endDate, statuses } = req.query;
+
+        if (!projects) {
+            return res.status(400).json({ error: 'Projects are required' });
+        }
+        // if (!statuses) {
+        //     return res.status(400).json({ error: 'At least one status is required' });
+        // }
+
+        // Convert projects & statuses from comma-separated strings to arrays
+        const projectsArray = Array.isArray(projects) ? projects : projects.split(',');
+
+        const statusesArray = statuses ? statuses.split(',') : [];
+
+        // Set default values if null
+        if (!startDate) {
+            startDate = "2025-01-01"; // Default: 01-Jan-2025
+        }
+        if (!endDate) {
+            endDate = format(new Date(), "yyyy-MM-dd"); // Default: Today
+        }
+
+        const metrics = await getStoryPointMetrics(projectsArray, startDate, endDate, statusesArray);
+        res.json(metrics);
+    } catch (error) {
+        console.error("Error fetching story point metrics:", error.message);
+        res.status(500).json({ error: 'Failed to retrieve story point metrics' });
+    }
+});
+
+
+/**
+ * API Route to get project-based KPI
+ */
+router.post('/project-kpi', async (req, res) => {
+    try {
+        const { projects } = req.body;
+        if (!projects || projects.length === 0) {
+            return res.status(400).json({ error: "Projects list is required." });
+        }
+        // const kpiResults = await processProjectKpis(projects);
+        // res.json(kpiResults);
+        res.json({ message: "not supported yet."})
+    } catch (error) {
+        console.error("Error processing KPI:", error);
+        res.status(500).json({ error: "Internal server error." });
+    }
+});
 /**
  * @route GET /api/project-tracking/:projectKey
  * @desc Fetch epic completion rate, on-time delivery, risk register, and stakeholder engagement.

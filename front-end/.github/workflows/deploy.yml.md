@@ -1,13 +1,12 @@
 name: Deploy Frontend to S3 & CloudFront
 
 on:
-  push:
-    branches:
-      - main  # Change this to your deployment branch
+push:
+branches: - main # Change this to your deployment branch
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+deploy:
+runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code

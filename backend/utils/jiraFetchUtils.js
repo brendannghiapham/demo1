@@ -27,11 +27,12 @@ const ROOT_CAUSE_FIELD = "customfield_10272"; // Bug Root Cause
  */
 async function fetchJiraIssues(jql, startAt) {
     const cacheKey = `jiraIssues_${jql}_${startAt}`;
+    console.log('JQL to search in Jira', jql);
 
     // Check cache first
     const cachedData = cache.get(cacheKey);
     if (cachedData) return cachedData;
-    const url = `${JIRA_API_BASE}/search?jql=${encodeURIComponent(jql)}&startAt=${startAt}&maxResults=${MAX_RESULTS}&fields=project,status,assignee,issuetype,timespent,timeoriginalestimate,timetracking,created,${STORY_POINTS_FIELD},${SPRINT_FIELD}, ${BUG_TYPE_FIELD}, ${ROOT_CAUSE_FIELD}`;
+    const url = `${JIRA_API_BASE}/search?jql=${encodeURIComponent(jql)}&startAt=${startAt}&maxResults=${MAX_RESULTS}&fields=project,resolutiondate,status,assignee,issuetype,timespent,timeoriginalestimate,timetracking,created,${STORY_POINTS_FIELD},${SPRINT_FIELD}, ${BUG_TYPE_FIELD}, ${ROOT_CAUSE_FIELD}`;
 
     try {
         const response = await axios.get(url, AUTH_HEADER);
@@ -60,11 +61,17 @@ async function fetchAllJiraIssues(jql, cacheKey, startDate, endDate) {
         endDate = formatDate(new Date());
     }
     jql = jql + ` AND created >= "${startDate}" AND created <= "${endDate}"`
-    console.log('JQL to search in Jira', jql);
 
     // Check cache first
     const cachedData = cache.get(cacheKey);
-    if (cachedData) return cachedData;
+    console.log('[APIUtil] Finding cache with key: ', cacheKey);
+    if (cachedData) {
+        console.log('[APIUtil] Cache found');
+        return cachedData
+    } else {
+        console.log('[APIUtil] Cache Not found');
+    }
+
 
     let allIssues = [];
     let startAt = 0;
@@ -87,7 +94,31 @@ async function fetchAllJiraIssues(jql, cacheKey, startDate, endDate) {
     // Flatten results into a single array
     allIssues = results.flat();
 
-    cache.set(cacheKey, allIssues, process.env.SYS_CACHE_TIME);
+    allIssues.forEach(issue => {
+        issue.expand = undefined;
+        issue.self = undefined;
+        if (issue.fields.issuetype) {
+            issue.fields.issuetype.self = undefined;
+            issue.fields.issuetype.iconUrl = undefined;
+            issue.fields.issuetype.description = undefined;
+        }
+
+
+        if (issue.fields.project) {
+            issue.fields.project.self = undefined;
+            issue.fields.project.avatarUrls = undefined;
+        }
+        if (issue.fields.assignee) {
+            issue.fields.assignee.self = undefined;
+            issue.fields.assignee.avatarUrls = undefined;
+        }
+        if (issue.fields.status.self) {
+            issue.fields.status.self = undefined;
+            issue.fields.status.description = undefined;
+            issue.fields.status.iconUrl = undefined;
+        }
+    });
+    cache.set(cacheKey, allIssues, 300);
     return allIssues;
 }
 
@@ -102,4 +133,28 @@ async function fetchProjectsFromJira(startAt = 0, maxResults) {
     }
 }
 
-module.exports = { fetchAllJiraIssues,  fetchProjectsFromJira};
+
+/**
+ * Fetch Story Points from Jira API
+ * @param {string} jql - JQL query
+ * @returns {Promise<Array>} List of issues with Story Points
+ */
+async function fetchStoryPoints(jql) {
+    const cacheKey = 'main-storypoint-compare';
+    try {
+        const cachedData = cache.get(cacheKey);
+        if (cachedData) return cachedData;
+
+        console.log('[apiUtil], requesting isseus with JQL: ', jql);
+        const response = await axios.get(
+            `${JIRA_API_BASE}/search?jql=${encodeURIComponent(jql)}&fields=project,issuetype,status,${STORY_POINTS_FIELD}`,
+            AUTH_HEADER
+        );
+        cache.set(cacheKey, response.data.issue, process.env.SYS_CACHE_TIME);
+        return response.data.issues || [];
+    } catch (error) {
+        console.error("Error fetching Story Points:", error.response?.data || error.message);
+        return [];
+    }
+}
+module.exports = { fetchAllJiraIssues,  fetchProjectsFromJira, fetchStoryPoints};

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   CssBaseline,
@@ -55,7 +55,19 @@ function App() {
     { key: 'KB', name: 'Kuribara' },
     { key: 'PDS', name: 'Product Design' },
   ]);
-  const [selectedProjects, setSelectedProjects] = useState([]);
+
+  const [selectedProjects, setSelectedProjects] = useState(() => {
+    // Load from local storage on mount
+    const savedProjects = localStorage.getItem('selectedProjects');
+    return savedProjects ? JSON.parse(savedProjects) : [];
+  });
+
+  // Save to local storage whenever selectedProjects changes
+  useEffect(() => {
+    localStorage.setItem('selectedProjects', JSON.stringify(selectedProjects));
+  }, [selectedProjects]);
+
+  // const [selectedProjects, setSelectedProjects] = useState([]);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const theme = useTheme();

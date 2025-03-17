@@ -5,7 +5,7 @@ service: dms-jira
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-1
+  region: ap-south-1
   environment:
     MONGO_URI: ${env:MONGODB_URI}
     JIRA_API_BASE: ${env:JIRA_API_BASE}
@@ -29,3 +29,5 @@ plugins:
 custom:
   serverless-offline:
     httpPort: 3001
+    reloadHandler: true  # Enables hot reload on file changes
+    useWorkerThreads: true

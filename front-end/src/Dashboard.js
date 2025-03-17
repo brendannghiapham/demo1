@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { fetchKpiData, fetchSprintVelocity, fetchBugData } from './services/services';
+import {
+  fetchBugData,
+  fetchProjectKPI,
+  fetchSprintVelocity2,
+  groupProjectMetrics,
+} from './services/services';
 import {
   Typography,
   CircularProgress,
@@ -9,17 +14,16 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
-import { parse } from 'date-fns';
-
-import ProjectSelector from './components/ProjectSelector';
 import TaskCompletion from './components/TaskCompletion';
 import BugFixing from './components/main-dashboard/BugFixing';
 import TimeTracking from './components/TimeTracking';
 import SprintVelocity from './components/main-dashboard/SprintVelocity';
 import BugAnalyticsChart from './components/main-dashboard/BugAnalyticsChart';
 import BugGroupByDateAndProject from './components/main-dashboard/BugGroupByDateAndProject';
+import { fetchAllIssues } from './utils/api.utils';
+import BurndownChart from './components/BurndownChart';
+import TaskStatusTable from './components/TaskStatusTable';
+import KPIChart from './components/KPIChart';
 
 function Dashboard({ selectedProjects, startDate, endDate }) {
   // ✅ Use props from App.js
@@ -35,15 +39,18 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
       setBugData({});
     }
     setLoading(true);
+    const allIssues = await fetchAllIssues(selectedProjects, startDate, endDate);
     Promise.all([
-      fetchKpiData(selectedProjects, startDate, endDate),
-      fetchSprintVelocity(selectedProjects, startDate, endDate),
-      fetchBugData(selectedProjects, startDate, endDate),
+      fetchProjectKPI(allIssues),
+      fetchSprintVelocity2(allIssues),
+      fetchBugData(allIssues),
+      groupProjectMetrics(allIssues),
     ])
-      .then(([kpiResult, sprintResult, bugResult]) => {
+      .then(([kpiResult, sprintResult, bugResult, groupProjectMetrics]) => {
         setKpiData(kpiResult);
         setSprintVelocity(sprintResult);
         setBugData(bugResult);
+        console.log('groupProjectMetrics', groupProjectMetrics);
       })
       .catch((error) => console.error('Error fetching data:', error))
       .finally(() => setLoading(false));
@@ -67,6 +74,10 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
         </Box>
       ) : kpiData.length > 0 ? (
         <Grid container spacing={3} sx={{ justifyContent: 'center' }}>
+          <Typography variant="h5">Burndown Chart</Typography>
+          {/*<BurndownChart />*/}
+          {/*{<TaskStatusTable />}*/}
+          {<KPIChart />}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
               <TaskCompletion kpiData={kpiData} />
