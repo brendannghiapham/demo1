@@ -17,11 +17,11 @@ export const fetchProjectKPIGroupByWeek = async (allIssues) => {
       const timeEstimated = issue.fields.timeoriginalestimate || 0;
       const storyPoints = issue.fields[STORY_POINTS_FIELD] || 0;
       const projectKey = issue.fields.project.key;
+      const isCompleted = issue.fields.status.name.toLowerCase() === 'done';
 
       // Extract the week from the created date (YYYY-ww)
       const createdDate = issue.fields.created.split('T')[0]; // Get the date without the time part
-      const date = new Date(createdDate); // Ensure the date is properly parsed
-      const week = format(startOfWeek(date, { weekStartsOn: 1 }), 'yyyy-ww'); // Format to YYYY-ww
+      const week = toWeekDay(createdDate);
 
       // Initialize user metrics if not already initialized
       if (!userMetrics[user]) {
@@ -35,18 +35,21 @@ export const fetchProjectKPIGroupByWeek = async (allIssues) => {
           totalTimeSpent: 0,
           totalTimeEstimated: 0,
           totalEstimatedStoryPoint: 0,
-          taskTypes: {}, // Track issue types (Bug, User Story, etc.)
+          taskTypes: {}, // Track issue types (Bug, User Story, etc.),
+          completedStoryPoints: 0,
         };
       }
 
       // Track weekly contributions (total tasks, total bugs, time spent, etc.)
       userMetrics[user].weeklyData[week].totalTasks++;
       userMetrics[user].weeklyData[week].totalTimeSpent += timeSpent / 3600; // Convert seconds to hours
-      userMetrics[user].weeklyData[week].totalTimeEstimated += timeEstimated / 3600; // Convert seconds to hours
+      userMetrics[user].weeklyData[week].totalTimeEstimated += storyPoints; // Convert seconds to hours
       userMetrics[user].weeklyData[week].totalEstimatedStoryPoint += storyPoints;
 
       if (issueType === 'Bug') userMetrics[user].weeklyData[week].totalBugs++;
-
+      if (isCompleted) {
+        userMetrics[user].weeklyData[week].completedStoryPoints += storyPoints;
+      }
       // Track the count of each issue type
       if (!userMetrics[user].weeklyData[week].taskTypes[issueType]) {
         userMetrics[user].weeklyData[week].taskTypes[issueType] = 0;
@@ -73,7 +76,8 @@ export const fetchProjectKPIGroupByMonth = async (allIssues) => {
       const timeSpent = issue.fields.timespent || 0;
       const timeEstimated = issue.fields.timeoriginalestimate || 0;
       const storyPoints = issue.fields[STORY_POINTS_FIELD] || 0;
-      const projectKey = issue.fields.project.key;
+      // const projectKey = issue.fields.project.key;
+      const isCompleted = issue.fields.status.name.toLowerCase() === 'done';
 
       // Extract the month from the created date (YYYY-MM)
       const createdDate = issue.fields.created.split('T')[0]; // Get the date without the time part
@@ -91,7 +95,8 @@ export const fetchProjectKPIGroupByMonth = async (allIssues) => {
           totalTimeSpent: 0,
           totalTimeEstimated: 0,
           totalEstimatedStoryPoint: 0,
-          taskTypes: {}, // Track issue types (Bug, User Story, etc.)
+          completedStoryPoints: 0,
+          taskTypes: {},
         };
       }
 
@@ -102,7 +107,9 @@ export const fetchProjectKPIGroupByMonth = async (allIssues) => {
       userMetrics[user].monthlyData[month].totalEstimatedStoryPoint += storyPoints;
 
       if (issueType === 'Bug') userMetrics[user].monthlyData[month].totalBugs++;
-
+      if (isCompleted) {
+        userMetrics[user].monthlyData[month].completedStoryPoints += storyPoints;
+      }
       // Track the count of each issue type
       if (!userMetrics[user].monthlyData[month].taskTypes[issueType]) {
         userMetrics[user].monthlyData[month].taskTypes[issueType] = 0;
@@ -155,7 +162,6 @@ export const fetchSprintVelocity2 = async (allIssues) => {
       });
     });
     const result = Object.values(sprintData).sort((a, b) => a.startDate.localeCompare(b.startDate));
-    console.log('[service] Sprint velocity data: ', result);
     return result;
   } catch (error) {
     console.error('Error fetching Sprint Velocity:', error);
@@ -215,7 +221,6 @@ export const groupBugsByProject = async (allIssues) => {
     });
 
     // const result = Object.values(sprintData).sort((a, b) => a.startDate.localeCompare(b.startDate));
-    console.log('[service] bugData: ', bugData);
     return bugData;
   } catch (error) {
     return [];
@@ -261,3 +266,4 @@ export const groupProjectMetrics = async (allIssues) => {
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 import axios from 'axios';
+import { toWeekDay } from '../utils/datetime.utils';

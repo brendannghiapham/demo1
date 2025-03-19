@@ -24,7 +24,7 @@ const BugAnalyticsChart = ({ bugData, project }) => {
   if (!bugData || Object.keys(bugData).length === 0) {
     return <Typography variant="h6">No Bug Data Available</Typography>;
   }
-  console.log('BugAnalyticsChart data', bugData);
+  // console.log('BugAnalyticsChart data', bugData);
   // Extract all unique months
   const allMonths = new Set();
   Object.keys(bugData).forEach((project) => {
@@ -40,6 +40,7 @@ const BugAnalyticsChart = ({ bugData, project }) => {
     ...bugData[month].bugTypes,
     ...bugData[month].rootCauses,
   }));
+  // console.log('BugAnalyticsChart data', chartData);
 
   // const allProjects = Object.keys(bugData);
   // Convert bug data into chart-friendly format

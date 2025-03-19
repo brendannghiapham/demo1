@@ -41,7 +41,7 @@ const TimeTracking = ({ kpiData }) => {
   const estimatedTime = sortedUsers.map((user) => {
     const monthlyData = user.monthlyData || {};
     return Object.values(monthlyData).reduce(
-      (acc, monthData) => acc + (monthData.totalTimeEstimated || 0),
+      (acc, monthData) => acc + (monthData.totalEstimatedStoryPoint || 0),
       0
     );
   });
@@ -49,7 +49,7 @@ const TimeTracking = ({ kpiData }) => {
   const actualTime = sortedUsers.map((user) => {
     const monthlyData = user.monthlyData || {};
     return Object.values(monthlyData).reduce(
-      (acc, monthData) => acc + (monthData.totalTimeSpent || 0),
+      (acc, monthData) => acc + (monthData.completedStoryPoints || 0),
       0
     );
   });
@@ -58,13 +58,13 @@ const TimeTracking = ({ kpiData }) => {
     labels: userNames,
     datasets: [
       {
-        label: 'Total Estimated Time (Hours)',
+        label: 'Total Estimated Story Point',
         data: estimatedTime,
         backgroundColor: predefinedColors[0], // Consistent Blue
         borderWidth: 1,
       },
       {
-        label: 'Actual Burned Time (Hours)',
+        label: 'Actual Delivered Story Point',
         data: actualTime,
         backgroundColor: predefinedColors[1], // Consistent Red
         borderWidth: 1,
@@ -77,12 +77,15 @@ const TimeTracking = ({ kpiData }) => {
     maintainAspectRatio: false,
     plugins: {
       legend: { position: 'top' },
-      title: { display: true, text: 'Estimated vs Actual Burned Time Per User' },
+      title: {
+        display: true,
+        text: 'Estimated vs Actual Delivered Story Point Per User By Date Search Range',
+      },
     },
     scales: {
       y: {
         beginAtZero: true,
-        title: { display: true, text: 'Time (Hours)' },
+        title: { display: true, text: 'Story Point' },
       },
     },
   };
@@ -90,7 +93,7 @@ const TimeTracking = ({ kpiData }) => {
   return (
     <Paper sx={{ p: 2, boxShadow: 3 }}>
       <Typography variant="h6" align="center">
-        Time Tracking Per User
+        Story Point Delivered Tracking Per User
       </Typography>
       <Box sx={{ width: '100%', minHeight: '300px', height: 'auto' }}>
         <Bar data={chartData} options={chartOptions} />

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   AppBar,
   Box,
-  CssBaseline,
-  Toolbar,
-  Typography,
+  Button,
   Container,
+  CssBaseline,
   Grid,
   IconButton,
-  Button,
   Menu,
   MenuItem,
   Paper,
+  Toolbar,
+  Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -24,34 +24,13 @@ import DashboardProjectKPI from './DashboardProjectKPI';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { parse } from 'date-fns';
+import { projectList } from './project-list';
 
 const App = () => {
   const [selectedPage, setSelectedPage] = useState('Dashboard');
-  const [projects, setProjects] = useState([
-    { key: 'YUIM', name: 'Yuime' },
-    { key: 'STU', name: 'SD - Time Utilization' },
-    { key: 'DAICO', name: 'Daicolo' },
-    { key: 'TOUC', name: 'TOUCH' },
-    { key: 'TG', name: 'TOHO GAS' },
-    { key: 'NKR2', name: 'NikkenRentacom_2' },
-    { key: 'SG', name: 'SCOP-GO' },
-    { key: 'BCP', name: 'Borderless City Project' },
-    { key: 'SIP', name: 'SD Internal Project' },
-    { key: 'IP', name: 'Internal PJ' },
-    { key: 'HG', name: 'Hiruta GoDump' },
-    { key: 'CF', name: 'Calbee-FfF' },
-    { key: 'TIT', name: 'Titans' },
-    { key: 'OOPS', name: 'Oops' },
-    { key: 'JSR', name: 'Jitera Squad Raiders' },
-    { key: 'RAG', name: 'RAG' },
-    { key: 'ECHO', name: 'echo' },
-    { key: 'SEK', name: 'Sekisuiheim' },
-    { key: 'PMAX', name: 'PROMAX' },
-    { key: 'MIT', name: 'Mitaden' },
-    { key: 'IS', name: 'Ishibashi Gakki' },
-    { key: 'KB', name: 'Kuribara' },
-    { key: 'PDS', name: 'Product Design' },
-  ]);
+  const [projects, setProjects] = useState(projectList);
+
+  const isFirstRender = useRef(true);
 
   const [selectedProjects, setSelectedProjects] = useState(() => {
     const savedProjects = localStorage.getItem('selectedProjects');
@@ -59,9 +38,12 @@ const App = () => {
   });
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     localStorage.setItem('selectedProjects', JSON.stringify(selectedProjects));
   }, [selectedProjects]);
-
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -96,6 +78,7 @@ const App = () => {
       })
     );
   };
+  console.log('Hello App.js');
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

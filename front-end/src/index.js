@@ -6,11 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { StyledEngineProvider } from '@mui/material/styles';
 
-// ✅ Ensure a valid MUI theme is created
 const theme = createTheme();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  //TODO:  not recommend React.StrictMode in PRODUCTION mode.
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>

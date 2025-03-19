@@ -25,7 +25,7 @@ const predefinedColors = [
 ];
 
 const TaskCompletion = ({ kpiData }) => {
-  console.log('[TaskCompletion], kpiData', kpiData);
+  // console.log('[TaskCompletion], kpiData', kpiData);
 
   if (!kpiData || kpiData.length === 0) {
     return (
@@ -47,11 +47,12 @@ const TaskCompletion = ({ kpiData }) => {
 
   const datasets = sortedUsers.map((user, index) => ({
     label: user.user,
-    data: sortedMonths.map((month) => user.weeklyData?.[month]?.totalTasks || 0),
+    data: sortedMonths.map((month) => user.weeklyData?.[month]?.completedStoryPoints || 0),
     backgroundColor: predefinedColors[index % predefinedColors.length], // Cycle through predefined colors
     borderWidth: 1,
   }));
 
+  // console.log('Task comletition:', JSON.stringify(datasets));
   const chartData = {
     labels: sortedMonths,
     datasets,
@@ -75,6 +76,23 @@ const TaskCompletion = ({ kpiData }) => {
       <Typography variant="h6">Total workload of company by user</Typography>
       <Box sx={{ width: '100%', minHeight: '300px', height: 'auto' }}>
         <Bar data={chartData} options={chartOptions} />
+      </Box>
+      <Box mt={2} p={2} sx={{ backgroundColor: '#f9f9f9', borderRadius: 2 }}>
+        <Typography variant="body1">
+          <strong>Key Insights By AI: Disabled</strong>
+        </Typography>
+        {/*<Typography variant="body2">*/}
+        {/*  ✅ <b>Unassigned Tasks:</b> Highest completion rate (211 weeks).*/}
+        {/*</Typography>*/}
+        {/*<Typography variant="body2">*/}
+        {/*  ✅ <b>Duy Tang & Renal Apriansyah:</b> Strong performers (185 weeks each).*/}
+        {/*</Typography>*/}
+        {/*<Typography variant="body2">*/}
+        {/*  ✅ <b>Imamul Akhyar:</b> Maintains high productivity (169 weeks).*/}
+        {/*</Typography>*/}
+        {/*<Typography variant="body2">*/}
+        {/*  ✅ <b>Hieu Phan:</b> Consistent contributions (159 weeks).*/}
+        {/*</Typography>*/}
       </Box>
     </Box>
   );

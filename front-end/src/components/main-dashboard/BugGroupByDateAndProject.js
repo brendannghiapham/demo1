@@ -30,7 +30,7 @@ const BugGroupByDateAndProject = ({ bugData }) => {
     return <Typography variant="h6">No Bug Data Available</Typography>;
   }
 
-  console.log('BugGroupByDateAndProject data', bugData);
+  // console.log('BugGroupByDateAndProject data', bugData);
   // console.log('BugGroupByDateAndProject data', JSON.stringify(bugData));
   // Extract all unique months
   const allMonths = new Set();
@@ -77,7 +77,7 @@ const BugGroupByDateAndProject = ({ bugData }) => {
     ...bugData[month].bugTypes,
     ...bugData[month].rootCauses,
   }));
-  console.log('[bugGroup] rootCauseWeekData', chartDataLine);
+  // console.log('[bugGroup] rootCauseWeekData', chartDataLine);
 
   // Generate colors dynamically for projects
   const COLORS = [

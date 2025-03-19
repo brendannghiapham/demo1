@@ -17,8 +17,19 @@ const ProjectSelector = ({
     setSelectedProjects(event.target.value);
   };
 
+  const newProjectFormat = [];
+
+  Object.keys(projects).map((key) => {
+    const parsedProject = {};
+    parsedProject.key = key;
+    parsedProject.name = projects[key].name;
+    parsedProject.borderColor = projects[key].borderColor;
+    parsedProject.backgroundColor = projects[key].backgroundColor;
+    newProjectFormat.push(parsedProject);
+  });
+
   // Sort projects: Move selected projects to the top
-  const sortedProjects = [...projects].sort((a, b) => {
+  const sortedProjects = [...newProjectFormat].sort((a, b) => {
     const isSelectedA = selectedProjects.includes(a.key);
     const isSelectedB = selectedProjects.includes(b.key);
     return isSelectedB - isSelectedA; // Move selected projects to the top
