@@ -116,7 +116,7 @@ function Dashboard({ selectedProjects, startDate, endDate }) {
           {<ProjectStoryPointBurned projectKpiData={projectKpiData} />}
 
           {/*{<ProjectKPI issues={allIssues} />}*/}
-          <Grid item xs={6}>
+          <Grid item xs={12} md={12}>
             <Paper sx={{ p: 2, width: '100%', boxShadow: 3 }}>
               <BugRootCauseByWeekChart bugDataGroupByWeek={bugDataGroupByWeek} />
             </Paper>

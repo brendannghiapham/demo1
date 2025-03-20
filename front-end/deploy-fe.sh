@@ -5,7 +5,7 @@ BUCKET_NAME="jit-kpi-api-management"  # Replace with your S3 bucket name
 DISTRIBUTION_ID="E3V5KPKXQWPNKX"   # Replace with your CloudFront distribution ID
 
 echo "Building React app..."
-npm install
+#npm install
 npm run build
 
 echo "Uploading to S3..."

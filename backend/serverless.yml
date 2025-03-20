@@ -5,7 +5,7 @@ service: dms-jira
 provider:
   name: aws
   runtime: nodejs18.x
-  region: ap-south-1
+  region: ap-southeast-1
   environment:
     MONGO_URI: ${env:MONGODB_URI}
     JIRA_API_BASE: ${env:JIRA_API_BASE}
